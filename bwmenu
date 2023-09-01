@@ -53,7 +53,7 @@ DIR="$(dirname "$(readlink -f "$0")")"
 source "$DIR/lib-bwmenu"
 
 ask_password() {
-  rm $CACHE_FILE
+  test -f $CACHE_FILE && rm $CACHE_FILE
   mpw=$(printf '' | rofi -dmenu -p "Master Password" -password -l 0 ${ROFI_OPTIONS[@]}) || exit $?
   if ! out="$(bw --raw --nointeraction unlock "$mpw" 2>&1)"; then
     exit_error 1 "Could not unlock vault: $out"
