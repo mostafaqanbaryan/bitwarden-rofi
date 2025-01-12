@@ -254,15 +254,19 @@ auto_type() {
         type_word "$(echo "$2" | jq -r '.[0].login.username')"
         type_tab
         type_word "$(echo "$2" | jq -r '.[0].login.password')"
+        type_enter
         ;;
       username)
         type_word "$(echo "$2" | jq -r '.[0].login.username')"
+        type_enter
         ;;
       password)
         type_word "$(echo "$2" | jq -r '.[0].login.password')"
+        type_enter
         ;;
       totp)
         type_word "$(get_totp "$2")"
+        type_enter
         ;;
     esac
   fi
@@ -282,6 +286,10 @@ type_word() {
 
 type_tab() {
   "${AUTOTYPE_MODE[@]}" -k  Tab
+}
+
+type_enter() {
+  "${AUTOTYPE_MODE[@]}" -k Return
 }
 
 
